@@ -7,7 +7,15 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:4040'
+    origins '*'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :options, :head]
+    end
+
+  allow do
+    origins 'localhost:4040', https://travel-books.herokuapp.com/
 
     resource '*',
       headers: :any,
