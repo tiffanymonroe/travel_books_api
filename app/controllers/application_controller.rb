@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
     #does there need to be a 5th argument after the algorithm?
     puts token = JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
     # this doesn't render decoded info in postman, but does still do so in rails s console
-    JWT.decode(token_input, ENV['JWT_SECRET'], true)
+    JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
   rescue
     render json: { status: 401, message: 'Unauthorized' }
   end
