@@ -3,8 +3,7 @@ class ApplicationController < ActionController::API
   def authenticate_token
     puts "AUTHENTICATE JWT"
     #is the bearer_token the correct argument or does this need debugging?
-    render json: { status: 401, message: 'Unauthorized' }
-    unless decode_token(bearer_token)
+    render json: { status: 401, message: 'Unauthorized' } unless decode_token(bearer_token)
   end
 
   def bearer_token
@@ -43,5 +42,4 @@ class ApplicationController < ActionController::API
   end
 
 
-end
 end
