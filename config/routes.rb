@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :linkers
   resources :destinations
   resources :users do
     collection do
