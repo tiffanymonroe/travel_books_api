@@ -3,8 +3,7 @@ class ApplicationController < ActionController::API
   def authenticate_token
     puts "AUTHENTICATE JWT"
     #is the bearer_token the correct argument or does this need debugging?
-    render json: { status: 401, message: 'Unauthorized' }
-    unless decode_token(bearer_token)
+    render json: { status: 401, message: 'Unauthorized' } unless decode_token(bearer_token)
   end
 
   def bearer_token
@@ -23,7 +22,7 @@ class ApplicationController < ActionController::API
     #does there need to be a 5th argument after the algorithm?
     puts token = JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
     # this doesn't render decoded info in postman, but does still do so in rails s console
-    JWT.decode(token_input, ENV['JWT_SECRET'], true)
+    JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
   rescue
     render json: { status: 401, message: 'Unauthorized' }
   end
@@ -43,5 +42,4 @@ class ApplicationController < ActionController::API
   end
 
 
-end
 end

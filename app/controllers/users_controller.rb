@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-  before_action :authenticate_token, except: [:login, :create]
-  before_action :authorize_user, except: [:login, :create, :index]
+  # before_action :set_user, only: [:show, :update, :destroy]
+  # before_action :authenticate_token, except: [:login, :create]
+  # before_action :authorize_user, except: [:login, :create, :index]
 
   # user login
   def login
@@ -33,6 +33,10 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    puts 'can create a user here'
+
+    #would what is now being passed through change from the user_params which is stored below in a private environment - now change to passing through the user's JWT???
+    # @user = User.new(user_params)
     @user = User.new(user_params)
 
     if @user.save
