@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  destination: MyString
+  purpose: MyString
+  transportation: MyString
+  season: MyString
+  climate: MyString
+
+two:
+  destination: MyString
+  purpose: MyString
+  transportation: MyString
+  season: MyString
+  climate: MyString
