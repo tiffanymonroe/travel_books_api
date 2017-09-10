@@ -27,5 +27,17 @@ end
 
 User.create({
     username: "Jennifer",
-    password: "Jennifer"
+    password: "escape"
+  })
+
+
+User.create({
+    username: "Tiffany",
+    password: "escape"
+  })
+
+
+User.create({
+    username: "Sarah",
+    password: "escape"
   })
