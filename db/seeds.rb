@@ -24,25 +24,3 @@ end
     climate: 'Beach'
     })
 end
-
-User.create({
-    username: "Jennifer",
-    password: "escape"
-  })
-
-
-User.create({
-    username: "Tiffany",
-    password: "escape"
-  })
-
-
-User.create({
-    username: "Sarah",
-    password: "escape"
-  })
-
-User.create({
-    username: "Hacker",
-    password: "escape"
-  })

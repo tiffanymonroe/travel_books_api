@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   def login
     puts '--- LOGIN ---'
     puts username: params[:user][:username]
-    puts password: params[:user][:password] = "escape"
+    puts password: params[:user][:password]
+    # = 'escape'
     user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
@@ -89,6 +90,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :img, :post)
+      params.require(:user).permit(:username, :password, :password_digest, :img, :post)
     end
 end
