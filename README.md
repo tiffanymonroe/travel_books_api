@@ -1,5 +1,8 @@
 # README
 
+Link to front-end hosted site:
+https://travel-books.herokuapp.com/
+
 Creators:
 Jen Schumann
 Sarah Anderson

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908152521) do
+ActiveRecord::Schema.define(version: 20170909200243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20170908152521) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "linkers", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "destination_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_linkers_on_book_id"
+    t.index ["destination_id"], name: "index_linkers_on_destination_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -43,4 +52,6 @@ ActiveRecord::Schema.define(version: 20170908152521) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "linkers", "books"
+  add_foreign_key "linkers", "destinations"
 end

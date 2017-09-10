@@ -14,3 +14,13 @@
     genre: Faker::Book.genre
   })
 end
+
+10.times do
+  Destination.create({
+    destination: Faker::Address.city,
+    purpose: Faker::Hipster.word,
+    transportation: Faker::Vehicle.manufacture,
+    season: 'Autumn',
+    climate: 'Beach'
+    })
+end

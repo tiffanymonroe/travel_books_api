@@ -4,14 +4,27 @@ class UsersController < ApplicationController
   before_action :authorize_user, except: [:login, :create, :index]
 
   # user login
-  def login
-    user = User.find_by(username: params[:user][:username])
+  # def login
+  #   user = User.find_by(username: params[:user][:username])
+  #
+  #   if user && user.authenticate(params[:user][:password])
+  #     token = create_token(user.id, user.username)
+  #     render json: {status: 200, token: token, user: user}
+  #   else
+  #     render json: {status: 401, message: "Unauthorized"}
+  #   end
+  # end
 
+  def login
+    puts '--- LOGIN ---'
+    puts username: params[:user][:username]
+    puts password: params[:user][:password] = "Jennifer"
+    user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
       render json: {status: 200, token: token, user: user}
     else
-      render json: {status: 401, message: "Unauthorized"}
+      render json: {status: 401, message: "Unauthorized - Login"}
     end
   end
 
@@ -33,6 +46,10 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    puts 'can create a user here'
+
+    #would what is now being passed through change from the user_params which is stored below in a private environment - now change to passing through the user's JWT???
+    # @user = User.new(user_params)
     @user = User.new(user_params)
 
     if @user.save
