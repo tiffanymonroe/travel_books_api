@@ -1,24 +1,14 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :update, :destroy]
-  # before_action :authenticate_token, except: [:login, :create]
-  # before_action :authorize_user, except: [:login, :create, :index]
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_token, except: [:login, :create]
+  before_action :authorize_user, except: [:login, :create, :index]
 
   # user login
-  # def login
-  #   user = User.find_by(username: params[:user][:username])
-  #
-  #   if user && user.authenticate(params[:user][:password])
-  #     token = create_token(user.id, user.username)
-  #     render json: {status: 200, token: token, user: user}
-  #   else
-  #     render json: {status: 401, message: "Unauthorized"}
-  #   end
-  # end
-
   def login
     puts '--- LOGIN ---'
     puts username: params[:user][:username]
-    puts password: params[:user][:password] = "Jennifer"
+    puts password: params[:user][:password]
+    # = 'escape'
     user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
@@ -100,6 +90,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :img, :post)
+      params.require(:user).permit(:username, :password, :password_digest, :img, :post)
     end
 end
