@@ -41,3 +41,8 @@ User.create({
     username: "Sarah",
     password: "escape"
   })
+
+User.create({
+    username: "Hacker",
+    password: "escape"
+  })
