@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:show, :update, :destroy]
+  before_action :set_destination, only: [:show]
 
   # GET /destinations
   def index
@@ -23,22 +23,7 @@ class DestinationsController < ApplicationController
       render json: @destination.errors, status: :unprocessable_entity
     end
   end
-
-  # PATCH/PUT /destinations/1
-  def update
-    if @destination.update(destination_params)
-      render json: @destination
-    else
-      render json: @destination.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /destinations/1
-  def destroy
-    @destination.destroy
-  end
-
-  private
+private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
       @destination = Destination.find(params[:id])
