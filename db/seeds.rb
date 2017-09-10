@@ -24,3 +24,8 @@ end
     climate: 'Beach'
     })
 end
+
+User.create({
+    username: "Jennifer",
+    password: "Jennifer"
+  })
