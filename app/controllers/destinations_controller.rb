@@ -26,11 +26,11 @@ class DestinationsController < ApplicationController
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
-      @destination = Destination.find(params[:id])
+      destination = Destination.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def destination_params
-      params.require(:destination).permit(:destination, :purpose, :transportation, :season, :climate)
+      params.require(:destination).permit(:name, :purpose, :transportation, :season, :climate)
     end
 end
