@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:index, :show, :create]
+  before_action :set_book, only: [:show]
+  # before_action :authorize_user, except: [:index]
 
 
 
