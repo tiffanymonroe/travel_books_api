@@ -1,5 +1,6 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:index, :show, :create]
+  before_action :set_destination, only: [:show]
+  # before_action :authorize_user, except: [:index]
 
   # GET /destinations
   def index
@@ -26,7 +27,7 @@ class DestinationsController < ApplicationController
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
-      destination = Destination.find(params[:id])
+      @destination = Destination.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
