@@ -11,7 +11,8 @@
     title: Faker::Book.title,
     author: Faker::Book.author,
     isbn: Faker::Number.number(13),
-    genre: Faker::Book.genre
+    genre: Faker::Book.genre,
+    user_id: 1
   })
 end
 
@@ -21,6 +22,12 @@ end
     purpose: Faker::Hipster.word,
     transportation: Faker::Vehicle.manufacture,
     season: 'Autumn',
-    climate: 'Beach'
+    climate: 'Beach',
+    user_id: 2
     })
 end
+
+User.create([
+  { username: "Polly" },
+  { username: "HeMan" }
+])

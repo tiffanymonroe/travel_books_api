@@ -92,10 +92,15 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      #trying this to address couldn't find id w/user=login error:
+      # @user = User.find(user_id)
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
+      #from markdown
+      # params.require(:user).permit(:username, :password, :password_digest, :img, :post)
+      #guesswork
       params.require(:user).permit(:username, :password, :password_digest, :img, :post)
     end
 
