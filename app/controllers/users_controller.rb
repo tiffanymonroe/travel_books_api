@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:index, :create, :show, :edit, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_user, except: [:login, :create, :index]
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
 
-  # GET /users
+  # GET /users... we don't want our user to see all logged in users:
   def index
     @users = User.all
 
@@ -28,7 +28,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # rails s console shows the id of the user (Parameters: {"id"=>"3"}) when postman get request of localhost:3000/users/3 is made.. but get 401 error in postman w/status 200 OK
     render json: @user
     #in markdown this change is referenced w/same results as commented above:
     # render json: get_current_user
@@ -36,9 +35,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    puts 'can create a user here'
-
-    #would what is now being passed through change from the user_params which is stored below in a private environment - now change to passing through the user's JWT???
+    # puts 'can create a user here'
     # @user = User.new(user_params)
     @user = User.new(user_params)
 
@@ -49,12 +46,21 @@ class UsersController < ApplicationController
     end
   end
 
+  #edit user
+  def edit
+    puts 'can i edit user please'
+    @user = User.find(params[:id])
+    puts 'user code worked and trying to edit from backend'
+  end
+
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      redirect to @user
+      # Handle a successful update.
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render 'edit'
     end
   end
 
@@ -92,4 +98,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password, :password_digest, :img, :post)
     end
+
+
+
 end

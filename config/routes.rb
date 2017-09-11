@@ -6,7 +6,16 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      post '/login', to: 'users#login'
+      post '/login', to: 'users#login',
+      post '/post', to: 'users#create',
+
+  resources :user do
+    collection do
+      patch '/users/:id', to: 'users#update',
+      put '/users/:id', to: 'users#update',
+      delete '/users/:id', to: 'users#destroy'
+    end
+  end
     end
   end
 end
