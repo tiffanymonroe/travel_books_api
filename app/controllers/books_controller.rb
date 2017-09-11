@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show]
+  before_action :set_book, only: [:index, :show, :create]
 
 
 
@@ -29,7 +29,7 @@ class BooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      book = Book.find(params[:id])
+      @book = Book.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

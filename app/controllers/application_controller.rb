@@ -13,8 +13,8 @@ class ApplicationController < ActionController::API
     pattern = /^Bearer /
     puts "TOKEN WITHOUT BEARER"
     puts header.gsub(pattern, '') if header && header.match(pattern)
-    return header.gsub(pattern, '')
-    # header.gsub(pattern, '') if header && header.match(pattern)
+    # return header.gsub(pattern, '')
+    header.gsub(pattern, '') if header && header.match(pattern)
   end
 
   def decode_token(token_input)
@@ -22,9 +22,9 @@ class ApplicationController < ActionController::API
     # this works renders get request in postman and rails s console w/decoded info
     #does there need to be a 5th argument after the algorithm?
     puts token = JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
-    return token
+    # return token
     # this doesn't render decoded info in postman, but does still do so in rails s console
-    # JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
+    JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256' })
   rescue
     render json: { status: 401, message: 'Unauthorized User, Get Out!!!' }
   end

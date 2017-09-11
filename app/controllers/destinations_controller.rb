@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:show]
+  before_action :set_destination, only: [:index, :show, :create]
 
   # GET /destinations
   def index

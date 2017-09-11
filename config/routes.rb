@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   resources :books
   resources :destinations
 
+  resources :books do
+    collection do
+      get '/books', to: 'books#index'
+    end
+  end
+
   # resources :user do
 
 
