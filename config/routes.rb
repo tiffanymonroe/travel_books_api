@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # resources :linkers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # resources :books do
   #   collection do
   #     get '/books', to: 'books#index'
@@ -10,6 +11,10 @@ Rails.application.routes.draw do
   # end
 
   # resources :user do
+=======
+  resources :books, only: [:index, :show]
+  resources :destinations, only: [:index, :show]
+>>>>>>> 72b08a748bd0256f9396aab4bb2ad933b3c136e2
 =======
   resources :books, only: [:index, :show]
   resources :destinations, only: [:index, :show]
