@@ -18,7 +18,7 @@ class DestinationsController < ApplicationController
     @destination = Destination.new(destination_params)
 
     if @destination.save
-      render json: @destination, status: :created, location: @destination
+      render json: @destination, status: :created
     else
       render json: @destination.errors, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class DestinationsController < ApplicationController
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
-      destination = Destination.find(params[:id])
+      @destination = Destination.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
