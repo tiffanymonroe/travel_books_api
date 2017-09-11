@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:index, :show, :create]
+  before_action :set_destination, only: [:show]
 
   # GET /destinations
   def index
@@ -23,6 +23,7 @@ class DestinationsController < ApplicationController
       render json: @destination.errors, status: :unprocessable_entity
     end
   end
+
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination

@@ -1,28 +1,41 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   # resources :linkers
-  resources :books
-  resources :destinations
+  resources :books, only: [:index, :show, :create]
+  resources :destinations, only: [:index, :show, :create]
 
-  resources :books do
+  resources :users, only: [:index, :create, :show, :update, :destroy] do
     collection do
-      get '/books', to: 'books#index'
+      post '/login', to: 'users#login'
     end
   end
+end
+
+
+  # resources :books do
+  #   collection do
+  #     get '/books', to: 'books#index'
+  #   end
+  # end
 
   # resources :user do
 
 
-  resources :users do
-    collection do
-      post '/login', to: 'users#login'
-        resources :books, only: [:index, :show, :create]
-        resources :destinations, only: [:index, :show, :create]
-      # post '/post', to: 'users#create'
-    end
+  # resources :users do
+  #   collection do
+  #     post '/login', to: 'users#login'
+  #       resources :users, only: [:index, :create, :show, :update, :destroy]
+  #       resources :linkers, only: [:index]
+  #       resources :books, only: [:index, :show, :create]
+  #       resources :destinations, only: [:index, :show, :create]
+  #     # post '/post', to: 'users#create'
+  #   end
 
-  end
-  end
+    # resources :linkers
+    # resources :books
+    # resources :destinations
+  # end
+  # end
 
 
 
