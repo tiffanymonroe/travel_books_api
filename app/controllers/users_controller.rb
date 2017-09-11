@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_user, except: [:login, :create, :index]
 
@@ -67,6 +67,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    puts 'trying to destroy 1 user'
+    @user = User.find(params[:id])
     @user.destroy
   end
 
