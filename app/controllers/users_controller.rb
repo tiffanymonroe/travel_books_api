@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  # before_action :set_user, only: [:show]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_user, except: [:login, :create, :index]
 
@@ -28,7 +28,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    user_books = @user.books
+    render json: { user: @user, books: user_books }
+    # render json: @user
     #in markdown this change is referenced w/same results as commented above:
     # render json: get_current_user
   end
@@ -47,20 +49,31 @@ class UsersController < ApplicationController
   end
 
   #edit user
-  def edit
-    puts 'can i edit user please'
-    @user = User.find(params[:id])
-    puts 'user code worked and trying to edit from backend'
-  end
+  # def edit
+  #   puts 'can i edit user please'
+  #   @user = User.find(params[:id])
+  #   puts 'user code worked and trying to edit from backend'
+  # end
 
   # PATCH/PUT /users/1
+  # def update
+  #   @user = User.find(params[:id])
+  #   if @user.update_attributes(user_params)
+  #
+  #     redirect to @user
+  #     # Handle a successful update.
+  #   else
+  #     render 'edit'
+  #   end
+  # end
+
+
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      redirect to @user
-      # Handle a successful update.
+    if @user.update(user_params)
+      render json: @user
     else
-      render 'edit'
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
