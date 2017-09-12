@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_user, except: [:login, :create, :index]
 
@@ -24,7 +24,8 @@ class UsersController < ApplicationController
     @users = User.all
 
     # render json: @users
-    render json: @users.to_json(include: :books, include: :destinations)
+    # how do you include more than one include:
+    render json: @users.to_json(include: :books)
   end
 
   # GET /users/1
@@ -56,30 +57,11 @@ class UsersController < ApplicationController
     end
   end
 
-  #edit user
-  # def edit
-  #   puts 'can i edit user please'
-  #   @user = User.find(params[:id])
-  #   puts 'user code worked and trying to edit from backend'
-  # end
-
-  # PATCH/PUT /users/1
-  # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(user_params)
-  #
-  #     redirect to @user
-  #     # Handle a successful update.
-  #   else
-  #     render 'edit'
-  #   end
-  # end
-
-
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       render json: @user
+      puts 'backend trying to update a user'
     else
       render json: @user.errors, status: :unprocessable_entity
     end

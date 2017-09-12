@@ -1,5 +1,6 @@
 class DestinationsController < ApplicationController
   before_action :set_destination, only: [:show]
+  #gets error if running this line of code:
   # before_action :authorize_user, except: [:index]
 
 

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
-  # before_action :authorize_user, except: [:index]
+  #gets error if running this line of code:
+  before_action :authorize_user, except: [:index, :show, :create]
 
   # GET /books
   def index
