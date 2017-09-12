@@ -1,5 +1,8 @@
 class DestinationsController < ApplicationController
   before_action :set_destination, only: [:show]
+  #gets error if running this line of code:
+  # before_action :authorize_user, except: [:index]
+
 
   # GET /destinations
   def index
@@ -23,6 +26,7 @@ class DestinationsController < ApplicationController
       render json: @destination.errors, status: :unprocessable_entity
     end
   end
+
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_destination
@@ -31,6 +35,6 @@ private
 
     # Only allow a trusted parameter "white list" through.
     def destination_params
-      params.require(:destination).permit(:destination, :purpose, :transportation, :season, :climate)
+      params.require(:destination).permit(:name, :purpose, :transportation, :season, :climate, :user_id)
     end
 end

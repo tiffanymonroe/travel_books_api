@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
-
-
+  #gets error if running this line of code:
+  before_action :authorize_user, except: [:index, :show, :create]
 
   # GET /books
   def index
@@ -29,11 +29,13 @@ class BooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      book = Book.find(params[:id])
+      @book = Book.find(params[:id])
+
+
     end
 
     # Only allow a trusted parameter "white list" through.
     def book_params
-      params.require(:book).permit(:title, :author, :isbn, :genre)
+      params.require(:book).permit(:title, :author, :isbn, :genre, :user_id)
     end
 end

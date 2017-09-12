@@ -1,24 +1,14 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :update, :destroy]
-  # before_action :authenticate_token, except: [:login, :create]
-  # before_action :authorize_user, except: [:login, :create, :index]
+  before_action :set_user, only: [:show]
+  before_action :authenticate_token, except: [:login, :create]
+  before_action :authorize_user, except: [:login, :create, :index]
 
   # user login
-  # def login
-  #   user = User.find_by(username: params[:user][:username])
-  #
-  #   if user && user.authenticate(params[:user][:password])
-  #     token = create_token(user.id, user.username)
-  #     render json: {status: 200, token: token, user: user}
-  #   else
-  #     render json: {status: 401, message: "Unauthorized"}
-  #   end
-  # end
-
   def login
     puts '--- LOGIN ---'
     puts username: params[:user][:username]
-    puts password: params[:user][:password] = "Jennifer"
+    puts password: params[:user][:password]
+    # = 'escape'
     user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
@@ -29,26 +19,34 @@ class UsersController < ApplicationController
   end
 
 
-  # GET /users
+  # GET /users... we don't want our user to see all logged in users:
   def index
     @users = User.all
 
-    render json: @users
+    # render json: @users
+    # how do you include more than one include:
+    render json: @users.to_json(include: :books)
   end
 
   # GET /users/1
   def show
-    # rails s console shows the id of the user (Parameters: {"id"=>"3"}) when postman get request of localhost:3000/users/3 is made.. but get 401 error in postman w/status 200 OK
     render json: @user
+
+
+    # user_books = @user.books
+    # user_destinations = @user.destinations
+    # render json: { user: @user, books: user_books, destinations: user_destinations }
+    # render json: @user.to_json(include: :books)
+
+
+
     #in markdown this change is referenced w/same results as commented above:
     # render json: get_current_user
   end
 
   # POST /users
   def create
-    puts 'can create a user here'
-
-    #would what is now being passed through change from the user_params which is stored below in a private environment - now change to passing through the user's JWT???
+    # puts 'can create a user here'
     # @user = User.new(user_params)
     @user = User.new(user_params)
 
@@ -59,10 +57,11 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
       render json: @user
+      puts 'backend trying to update a user'
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -71,6 +70,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    puts 'trying to destroy 1 user'
+    @user = User.find(params[:id])
     @user.destroy
   end
 
@@ -96,10 +97,18 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      #trying this to address couldn't find id w/user=login error:
+      # @user = User.find(user_id)
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :img, :post)
+      #from markdown
+      # params.require(:user).permit(:username, :password, :password_digest, :img, :post)
+      #guesswork
+      params.require(:user).permit(:username, :password, :password_digest, :img, :post)
     end
+
+
+
 end

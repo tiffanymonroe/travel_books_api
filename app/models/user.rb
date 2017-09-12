@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :book
-  belongs_to :destination
+  has_many :books
+  has_many :destinations
+
+  # belongs_to :book
+  # belongs_to :destination
 end
