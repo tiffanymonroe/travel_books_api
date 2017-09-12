@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
-  before_action :authorize_user, except: [:index]
+  # before_action :authorize_user, except: [:index]
 
   # GET /books
   def index
@@ -35,6 +35,6 @@ class BooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def book_params
-      params.require(:book).permit(:title, :author, :isbn, :genre)
+      params.require(:book).permit(:title, :author, :isbn, :genre, :user_id)
     end
 end

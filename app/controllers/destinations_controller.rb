@@ -1,6 +1,6 @@
 class DestinationsController < ApplicationController
   before_action :set_destination, only: [:show]
-  before_action :authorize_user, except: [:index]
+  # before_action :authorize_user, except: [:index]
 
 
   # GET /destinations
@@ -34,6 +34,6 @@ private
 
     # Only allow a trusted parameter "white list" through.
     def destination_params
-      params.require(:destination).permit(:name, :purpose, :transportation, :season, :climate)
+      params.require(:destination).permit(:name, :purpose, :transportation, :season, :climate, :user_id)
     end
 end
