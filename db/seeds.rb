@@ -5,29 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-10.times do
-  Book.create({
-    title: Faker::Book.title,
-    author: Faker::Book.author,
-    isbn: Faker::Number.number(13),
-    genre: Faker::Book.genre,
-    user_id: 1
-  })
-end
-
-10.times do
-  Destination.create({
-    name: Faker::Address.city,
-    purpose: Faker::Hipster.word,
-    transportation: Faker::Vehicle.manufacture,
-    season: 'Autumn',
-    climate: 'Beach',
-    user_id: 2
-    })
-end
-
-User.create([
-  { username: "Polly" },
-  { username: "HeMan" }
-])

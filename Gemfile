@@ -23,7 +23,6 @@ gem 'jwt'
 
 gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 
-gem 'faker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

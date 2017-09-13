@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  before_action :authenticate_token, except: [:login, :create]
-  before_action :authorize_user, except: [:login, :create, :index]
+  # need to see if destroy method can be added to allow delete on front end to work:
+  # before_action :authenticate_token, except: [:login, :create, :update, :destroy]
+  # before_action :authorize_user, except: [:login, :create, :index]
 
   # user login
   def login
